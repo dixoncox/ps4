@@ -20,7 +20,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "/home/gillazo/MOOCs/6.00.1x.Spring.2014/ps4/words.txt"
 
 def loadWords():
     """
@@ -77,7 +77,16 @@ def getWordScore(word, n):
     returns: int >= 0
     """
     # TO DO ... <-- Remove this comment when you code this function
-
+    letterTotal  = 0
+    wordLength = len(word)
+    
+    for i in word:
+        letterTotal += SCRABBLE_LETTER_VALUES[i]
+    #print 'letterTotal =',letterTotal
+    wordTotal = letterTotal*wordLength
+    if wordLength == n:
+        wordTotal = wordTotal + 50
+    return wordTotal
 
 
 #
