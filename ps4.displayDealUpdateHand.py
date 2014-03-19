@@ -66,3 +66,9 @@ def updateHand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ... <-- Remove this comment when you code this function
+    handRemaining = hand.copy()
+    
+    for k in word:
+        if k in handRemaining:
+            handRemaining[k] = handRemaining[k]-1
+    return handRemaining
