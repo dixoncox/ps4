@@ -182,6 +182,19 @@ def isValidWord(word, hand, wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
 
+    handRemaining = hand.copy()
+    inHand = True
+    
+    for k in word:
+        if (k in handRemaining) and (handRemaining[k] > 0):
+            handRemaining[k] = handRemaining[k]-1
+            inHand = inHand*True
+        else:
+            inHand = False
+    if inHand and (word in wordList):
+        return True
+    else:
+        return False
 
 #
 # Problem #4: Playing a hand
