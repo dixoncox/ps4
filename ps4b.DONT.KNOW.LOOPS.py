@@ -144,20 +144,19 @@ def playGame(wordList):
                 hand = dealHand(n) # new hand if 'n'
             #if gameChoice == 'r' and hand == {}:
             #    print 'You have not played a hand yet. Please play a new hand first!'         
-            playerChoice = ''
             while playerChoice != 'c' and playerChoice != 'u': # if 'c' or 'u' one of them is F and exits loop
                 playerChoice = raw_input('Enter u to have yourself play, c to have the computer play: ')
                 if playerChoice == 'u':
                     playHand(hand, wordList, n)
-                elif playerChoice == 'c':
+                if playerChoice == 'c':
                     compPlayHand(hand, wordList, n)
-                else:
-                    #print playerChoice
+                else: # <---- THIS ELSE IS EXCLUSIVELY TIED TO THE ABOVE IF. THEREFORE IT EXECUTES THE ELSE BECAUSE THE IF STATEMENT IS FALSE
+                    print playerChoice
                     print 'Invalid command.'
-        elif gameChoice == 'r' and hand == {}:
+        if gameChoice == 'r' and hand == {}:
             print 'You have not played a hand yet. Please play a new hand first!' 
-        elif gameChoice != 'e':
-            #print gameChoice
+        else: # <---- THIS ELSE IS EXCLUSIVELY TIED TO THE ABOVE IF. THEREFORE IT EXECUTES THE ELSE BECAUSE THE IF STATEMENT IS FALSE
+            print gameChoice
             print 'Invalid command'           
         
             
