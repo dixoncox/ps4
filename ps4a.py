@@ -265,11 +265,33 @@ def playHand(hand, wordList, n):
                 
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    totalScore = 0
+    wordScore = 0
+    word = ''
+    updatedHand = hand.copy()
+    
+    while (calculateHandlen(updatedHand) > 0) and word != '.':
+        print 'Current Hand:', # With the comma, it keeps them on the same line, but 
+                               # more importantly, it removes the displayHand() function
+                               # from the print statement, which caused 'None' to print
+        displayHand(updatedHand)
+        word = raw_input('Enter word, or a "." to indicate that you are finished: ')
+        if isValidWord(word, hand, wordList):
+            wordScore = getWordScore(word, n)
+            totalScore += wordScore
+            updatedHand = updateHand(updatedHand, word)
+            print '"' + word + '" earned', wordScore, 'points. Total:',totalScore
+            if calculateHandlen(updatedHand) == 0:
+                print 
+                print 'Run out of letters. Total score: ',totalScore,'points.'
+        elif word == '.':
+            print 'Goodbye! Total Score: ',totalScore
+        else:
+            print 'Invalid word, please try again.'        
+            
 
-
-#
-# Problem #5: Playing a game
-# 
+#Problem #5: Playing a game
+ 
 
 def playGame(wordList):
     """
@@ -280,18 +302,36 @@ def playGame(wordList):
       * If the user inputs 'r', let the user play the last hand again.
       * If the user inputs 'e', exit the game.
       * If the user inputs anything else, tell them their input was invalid.
- 
+
     2) When done playing the hand, repeat from step 1    
     """
     # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
-   
-
-
-
+#    print "playGame not yet implemented." # <-- Remove this line when you code the function
+    
+    n = HAND_SIZE
+    hand = {}   
+    choice = ''
+    while choice != 'e': # Won't even enter loop if 'e'
+        choice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end the game: ')        
+        if choice == 'n':
+            hand = dealHand(n) # Creates a new hand
+            playHand(hand, wordList, n)
+        if choice == 'r':
+            if hand == {}:
+                print 'You have not played a hand yet. Please a new hand first!'
+            else:
+                playHand(hand, wordList, n) # Uses old hand
+        elif choice != 'e' and choice != 'r' and choice != 'n':
+            print 'Invalid command.' # Should still stay in loop
+                
 #
-# Build data structures used for entire session and play game
+#Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
+
+#n=HAND_SIZE
+#wordList = loadWords()
+#hand = dealHand(n)
+#playHand(hand,wordList,n)
