@@ -29,7 +29,16 @@ def compChooseWord(hand, wordList, n):
     # Create a new variable to store the best word seen so far (initially None)  
 
     # For each word in the wordList
-
+    maxScore = 0    
+    bestWord = '' # or None?
+    for i in wordList:
+        if isValidWord(i, hand, wordList) and getWordScore(i,n) > maxScore: #if valid and score is higher than maxScore
+            maxScore = getWordScore(i,n)
+            bestWord = i
+    if bestWord == '':
+        return None
+    else:        
+        return bestWord
         # If you can construct the word from your hand
         # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
 
