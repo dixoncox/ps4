@@ -129,15 +129,44 @@ def compPlayHand(hand, wordList, n):
     # TO DO... <-- Remove this comment when you code this function
 #    print "playGame not yet implemented." # <-- Remove this when you code this function
 
+    gameChoice   = ''
+    playerChoice = ''
+    hand = {}
+
+    while gameChoice != 'e': #gameChoice != 'n' and gameChoice != 'r' and 
+        gameChoice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        #hand = dealHand(n)
+        #if gameChoice == 'r' and hand == {}:
+        #        print 'You have not played a hand yet. Please play a new hand first!'                     
+        if gameChoice == 'n' or (gameChoice == 'r' and hand != {}):
+            if gameChoice == 'n':
+                hand = dealHand(n) # new hand if 'n'
+            #if gameChoice == 'r' and hand == {}:
+            #    print 'You have not played a hand yet. Please play a new hand first!'         
+            while playerChoice != 'c' and playerChoice != 'u': # if 'c' or 'u' one of them is F and exits loop
+                playerChoice = raw_input('Enter u to have yourself play, c to have the computer play: ')
+                if playerChoice == 'u':
+                    playHand(hand, wordList, n)
+                if playerChoice == 'c':
+                    compPlayHand(hand, wordList, n)
+                else:
+                    print 'Invalid command.'
+        if gameChoice == 'r' and hand == {}:
+            print 'You have not played a hand yet. Please play a new hand first!' 
+        else:
+            print 'Invalid command'           
+        
+            
+            
         
 #
 # Build data structures used for entire session and play game
 #
-#if __name__ == '__main__':
-#    wordList = loadWords()
-#    playGame(wordList)
+if __name__ == '__main__':
+    wordList = loadWords()
+    playGame(wordList)
 
-n = HAND_SIZE
-hand = dealHand(n)
-wordList = loadWords()
-compPlayHand(hand, wordList, n)
+#n = HAND_SIZE
+#hand = dealHand(n)
+#wordList = loadWords()
+#compPlayHand(hand, wordList, n)
