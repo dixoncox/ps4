@@ -104,7 +104,7 @@ def compPlayHand(hand, wordList, n):
     wordTotal = 0
     updatedHand = hand.copy()
     
-    while compChooseWord(updatedHand, wordList, n) != None and (calculateHandlen(updatedHand)>0):
+    while calculateHandlen(updatedHand)>0:
         print
         print 'Current Hand: ', 
         displayHand(updatedHand)
@@ -114,10 +114,8 @@ def compPlayHand(hand, wordList, n):
             print '"' + computerWord + '" earned ', getWordScore(computerWord, n), 'points. Total: ',wordTotal
             updatedHand = updateHand(updatedHand, computerWord)
             #print
-    print
-    if calculateHandlen(updatedHand) != 0:
-        print 'Current Hand:', 
-        displayHand(updatedHand)
+        else:
+            break
     print 'Total score:', wordTotal, 'points.'
     
             
